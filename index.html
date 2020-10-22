@@ -55,7 +55,44 @@
 						<li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-twitter"></i></a>
 						</li>
 					</ul>
+<!-- //////////////PayPal-Button////////////// -->
+<div id="smart-button-container">
+      <div style="text-align: center;">
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR" data-sdk-integration-source="button-factory"></script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'white',
+          layout: 'horizontal',
+          label: 'paypal',
+          
+        },
 
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"Ihr Portfolio als Website!","amount":{"currency_code":"EUR","value":500}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name + '!');
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script>
+<!-- //////////////PayPal-Button////////////// -->
 				</div>
 			</div>
 			<div id="about-me" data-simplebar class="col-12 col-sm-12 col-md-7 col-lg-9 content about-me active">
@@ -348,44 +385,6 @@
 
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
-						<!-- //////////////PayPal-Button////////////// -->
-<div id="smart-button-container">
-      <div style="text-align: center;">
-        <div id="paypal-button-container"></div>
-      </div>
-    </div>
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR" data-sdk-integration-source="button-factory"></script>
-  <script>
-    function initPayPalButton() {
-      paypal.Buttons({
-        style: {
-          shape: 'rect',
-          color: 'white',
-          layout: 'horizontal',
-          label: 'paypal',
-          
-        },
-
-        createOrder: function(data, actions) {
-          return actions.order.create({
-            purchase_units: [{"description":"Ihr Portfolio als Website!","amount":{"currency_code":"EUR","value":500}}]
-          });
-        },
-
-        onApprove: function(data, actions) {
-          return actions.order.capture().then(function(details) {
-            alert('Transaction completed by ' + details.payer.name.given_name + '!');
-          });
-        },
-
-        onError: function(err) {
-          console.log(err);
-        }
-      }).render('#paypal-button-container');
-    }
-    initPayPalButton();
-  </script>
-<!-- //////////////PayPal-Button////////////// -->
 					</div>
 				</div>
 			</div>
