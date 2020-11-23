@@ -1,3 +1,14 @@
+/* 
+
+Code this website with me in a video codealong:
+https://youtu.be/wBQvr57UD2U
+
+Github repo for a better folder structure:
+https://github.com/FilipRastovic/clean-resume
+
+*/
+
+// Set a custom color
 $blue: #6C757D !default;
 $bg: #E9EDF0;
 body {
